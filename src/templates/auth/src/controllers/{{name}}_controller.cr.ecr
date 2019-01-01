@@ -1,0 +1,28 @@
+class <%= class_name %>Controller < ApplicationController
+  def show
+    render("show.<%= config.language %>") if (<%= @name %> = current_<%= @name %>)
+  end
+
+  def edit
+    render("edit.<%= config.language %>") if (<%= @name %> = current_<%= @name %>)
+  end
+
+  def update
+    if <%= @name %> = current_<%= @name %>
+      <%= @name %>.set_attributes <%= @name %>_params.validate!
+      if <%= @name %>.save
+        redirect_to "/profile", flash: {"success" => "Updated <%= @name %> successfully."}
+      else
+        flash[:danger] = "Could not update <%= @name %>!"
+        render "edit.<%= config.language %>"
+      end
+    end
+  end
+
+  private def <%= @name %>_params
+    params.validation do
+      required(:email)
+      optional(:password)
+    end
+  end
+end
