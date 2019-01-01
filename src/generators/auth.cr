@@ -8,7 +8,7 @@ module Amber::CLI
       add_timestamp_fields
     end
 
-    def pre_render(directory)
+    def post_render(directory)
       add_routes
       add_plugs
       add_dependencies
